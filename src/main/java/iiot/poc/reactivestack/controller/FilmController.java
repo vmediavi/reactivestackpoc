@@ -18,13 +18,11 @@ public class FilmController {
 
     private final FilmService filmService;
 
-    // Get all films
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Film> getAllFilms() {
         return filmService.getAllFilms();
     }
 
-    // Get a film by ID
     @GetMapping("/{id}")
     public Mono<ResponseEntity<Film>> getFilmById(@PathVariable Long id) {
         return filmService.getFilmById(id)
@@ -32,13 +30,11 @@ public class FilmController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-    // Create a new film
     @PostMapping
     public Mono<Film> createFilm(@RequestBody FilmCreateRequest request) {
         return filmService.createFilm(FilmCreateRequest.createFilm(request));
     }
 
-    // Update an existing film
     @PutMapping("/{id}")
     public Mono<ResponseEntity<Film>> updateFilm(
             @PathVariable Long id, @RequestBody FilmUpdateRequest request) {
@@ -51,7 +47,6 @@ public class FilmController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-    // Delete a film by ID
     @DeleteMapping("/{id}")
     public Mono<ResponseEntity<Void>> deleteFilm(@PathVariable Long id) {
         return filmService.deleteFilm(id)
