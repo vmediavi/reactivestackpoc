@@ -52,9 +52,9 @@ public class FilmReactiveRepositoryAdapter implements FilmRepository {
     @Override
     public Flux<Film> findAll() {
         var films = filmReactiveRepository.findAll();
-        var map = films.toStream()
-                .collect(Collectors.toMap(Film::getFilmId, Function.identity()));
-        hashOperations.putAll(KEY, map);
+        films.collect(Collectors
+                        .toMap(Film::getFilmId, Function.identity()))
+                .subscribe(idFilmMap -> hashOperations.putAll(KEY, idFilmMap));
         return films;
     }
 
