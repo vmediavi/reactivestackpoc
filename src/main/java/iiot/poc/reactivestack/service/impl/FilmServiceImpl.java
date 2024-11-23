@@ -3,16 +3,16 @@ package iiot.poc.reactivestack.service.impl;
 import iiot.poc.reactivestack.model.Film;
 import iiot.poc.reactivestack.repository.FilmRepository;
 import iiot.poc.reactivestack.service.FilmService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
 
-    @Autowired
-    private FilmRepository filmRepository;
+    private final FilmRepository filmRepository;
 
     @Override
     public Flux<Film> getAllFilms() {

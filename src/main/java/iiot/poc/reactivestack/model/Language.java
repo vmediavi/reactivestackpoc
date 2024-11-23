@@ -4,9 +4,11 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.io.Serializable;
+
 @Data
 @Table(schema = "public", name = "language")
-public class Language {
+public class Language implements Serializable {
     @Id
     private Long languageId;
     private String name;

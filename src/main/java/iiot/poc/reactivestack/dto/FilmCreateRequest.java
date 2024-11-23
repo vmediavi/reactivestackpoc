@@ -2,7 +2,7 @@ package iiot.poc.reactivestack.dto;
 
 import iiot.poc.reactivestack.model.Film;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record FilmCreateRequest(
         String title,
@@ -15,7 +15,7 @@ public record FilmCreateRequest(
         Double replacementCost,
         String rating,
         String specialFeatures,
-        LocalDateTime lastUpdate) {
+        LocalDate lastUpdate) {
 
     public static Film createFilm(FilmCreateRequest filmCreateRequest) {
         var film = new Film();
