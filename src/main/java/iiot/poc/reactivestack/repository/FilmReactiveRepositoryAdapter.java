@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -48,7 +51,11 @@ public class FilmReactiveRepositoryAdapter implements FilmRepository {
 
     @Override
     public Flux<Film> findAll() {
-        return filmReactiveRepository.findAll();
+        var films = filmReactiveRepository.findAll();
+        var map = films.toStream()
+                .collect(Collectors.toMap(Film::getFilmId, Function.identity()));
+        hashOperations.putAll(KEY, map);
+        return films;
     }
 
     @Override
